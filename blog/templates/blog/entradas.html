@@ -1,0 +1,49 @@
+{% extends 'blog/base.html' %}
+{% block titulo %} MiBlog {% endblock %}
+
+{% block contenido %}
+
+{% load hora_actual%}
+   Fecha: {% hora_actual "%Y-%m-%d Hora: %I:%M %p" %}
+
+{% load ultimas_categorias%}
+{% ultimas_categorias 5 %}
+
+{% load ultimas_entradas%}
+{% ultimas_entradas 5 %}
+
+{% if entradas %}
+{% for entrada in entradas %}
+
+    <h2>{{ entrada.titulo}}</h2>
+    <span> Autor {{ entrada.autor}}</span>
+    <span> Fecha de Publicacion{{ entrada.fecha}}</span>
+    <p>  {{entrada.texto|truncatewords:50|safe}}</p>
+   <div class="readmore"><a href="{{ entrada.get_absolute_url }}">seguir leyendo</a></div>
+
+{% endfor %}
+    </ul>
+
+{% else %}
+    <p>No hay Entradas.</p>
+{% endif %}
+
+{% endblock %}
+
+{% if is_paginated %}
+
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+    {% endif %}
+
+        <span class="current">
+            Pagina {{ page_obj.number }} de {{ paginator.num_pages }}.
+        </span>
+
+    {% if page_obj.has_next %}
+        <span class="pages"><a href="?page={{ page_obj.next_page_number }}">siguiente</a>
+    {% endif %}
+       </span>
+      </div>
+
+{% endif %}

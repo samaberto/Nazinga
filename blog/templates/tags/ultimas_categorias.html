@@ -1,0 +1,5 @@
+    <ul>
+{% for categoria in ultimas_categorias %}
+    <li> <a href="{{categoria.get_absolute_url }}">{{ categoria }}</a></li>
+{% endfor %}
+    </ul>

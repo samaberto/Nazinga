@@ -1,0 +1,18 @@
+﻿{% extends 'blog/base.html' %}
+{% block cabezera %}miblog|{{ year }}{% endblock %}
+
+
+{% block contenido %}
+
+    <h3> Entradas del año:
+
+{% for entrada in entradas %}
+
+    {% ifchanged %}{{entrada.fecha|date:"Y"}}</h3>{% endifchanged %}
+
+   <li> {{ forloop.counter }}<a href="{{entrada.get_absolute_url }}">
+{{ entrada }}</a></li>
+{% endfor %}
+   </ul>
+
+{% endblock %}

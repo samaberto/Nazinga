@@ -1,0 +1,5 @@
+    <ul>
+{% for entrada in ultimas_entradas %}
+    <li> <a href="{{entrada.get_absolute_url }}">{{ entrada }}</a></li>
+{% endfor %}
+   </ul>

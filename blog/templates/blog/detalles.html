@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+{% block cabezera %}miblog|{{ entradas.titulo }}{% endblock %}
+
+{% block contenido %}
+
+    <h1>{{entradas.titulo}}</h2>
+    <h2>Autor:{{entradas.autor}}</h2>
+    <h3>Fecha:{{entradas.fecha}}</h3>
+    <p>{{ entradas.texto|safe }}</p>
+
+    Categoria:
+{% for categoria in entradas.categoria.all %}
+
+    <a href="{{ categoria.get_absolute_url }}"> {{ categoria}}</a></ul>
+
+{% endfor %}
+
+{% endblock %}
+
+{% block  comentarios %}
+{% load comments %}
+
+{% if entradas  %}
+    <h3>Comentarios:</h3>
+
+    <p>{% render_comment_list for entradas %}</p>
+
+    </ul>
+{% else %}
+
+    <p>Se el primero en dejar tu comentario.</p>
+
+   {% endif %}
+
+   <h4>Deja un comentario</h4>
+{% render_comment_form for entradas %}
+
+{%endblock%}

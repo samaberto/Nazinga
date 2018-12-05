@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block cabezera %} Ver categorias|{{ categorias.nombre }}{% endblock %}
+
+{% block contenido %}
+<h3>Categoria:{{ categorias.nombre }}</h3>
+
+{% if entradas %}
+    <ul>
+        {% for entrada in entradas %}
+            <li><a href="{{ entrada.get_absolute_url }}">{{ entrada.titulo }}</a></li>
+        {% endfor %}
+            </ul>
+
+        {% else %}
+       <p>No hay Entradas en la Categoria {{ categorias.nombre }} </p>
+
+        {% endif %}
+{% endblock %}

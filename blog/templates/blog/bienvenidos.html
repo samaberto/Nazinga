@@ -1,0 +1,28 @@
+﻿{% extends 'blog/base.html' %}
+{% block titulo %}Bienvenidos a MiBlog {% endblock %}
+
+{% block contenido %}
+{% if entradas %}
+<ul>
+{% for e in entradas %}
+
+    <div class="post_meta">
+        {{ e.titulo}}
+           </div>
+
+       <div>
+       {{ e.autor}}
+          </div>
+       {{ e.fecha}}
+    <div class="post_body">
+       {{e.texto|truncatewords:50|safe}}
+          </div>
+       <a href="{{ e.get_absolute_url }}">seguir leyendo</a>
+
+{% endfor %}
+    </ul>
+{% else %}
+   <p>
+        No hay Entradas.
+   </p>
+{% endif %} {% endblock %}
